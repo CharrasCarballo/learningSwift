@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<model type="com.apple.IDECoreDataModeler.DataModel" documentVersion="1.0" lastSavedToolsVersion="16119" systemVersion="19F62f" minimumToolsVersion="Automatic" sourceLanguage="Swift" usedWithCloudKit="YES" userDefinedModelVersionIdentifier="">
+    <entity name="Expense" representedClassName="Expense" syncable="YES" codeGenerationType="class">
+        <attribute name="comments" optional="YES" attributeType="String"/>
+        <attribute name="day" optional="YES" attributeType="Date" usesScalarValueType="NO"/>
+        <attribute name="latitude" optional="YES" attributeType="String"/>
+        <attribute name="longitude" optional="YES" attributeType="String"/>
+        <attribute name="value" optional="YES" attributeType="Float" defaultValueString="0.0" usesScalarValueType="YES"/>
+        <relationship name="gasExpense" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="GasExpense" inverseName="expenseValue" inverseEntity="GasExpense"/>
+        <relationship name="type" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="ExpenseType" inverseName="expenses" inverseEntity="ExpenseType"/>
+    </entity>
+    <entity name="ExpenseType" representedClassName="ExpenseType" syncable="YES" codeGenerationType="class">
+        <attribute name="name" optional="YES" attributeType="String"/>
+        <relationship name="expenses" optional="YES" toMany="YES" deletionRule="Nullify" destinationEntity="Expense" inverseName="type" inverseEntity="Expense"/>
+    </entity>
+    <entity name="GasExpense" representedClassName="GasExpense" syncable="YES" codeGenerationType="class">
+        <attribute name="currentMileage" optional="YES" attributeType="Integer 32" defaultValueString="0" usesScalarValueType="YES"/>
+        <attribute name="gallons" optional="YES" attributeType="Float" defaultValueString="0.0" usesScalarValueType="YES"/>
+        <attribute name="gasPrice" optional="YES" attributeType="Float" defaultValueString="0.0" usesScalarValueType="YES"/>
+        <relationship name="expenseValue" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="Expense" inverseName="gasExpense" inverseEntity="Expense"/>
+        <relationship name="vehicle" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="Vehicle" inverseName="gasExpenses" inverseEntity="Vehicle"/>
+    </entity>
+    <entity name="Vehicle" representedClassName="Vehicle" syncable="YES" codeGenerationType="class">
+        <attribute name="model" optional="YES" attributeType="String"/>
+        <attribute name="name" optional="YES" attributeType="String"/>
+        <attribute name="plate" optional="YES" attributeType="String"/>
+        <attribute name="titleNumber" optional="YES" attributeType="String"/>
+        <attribute name="vin" optional="YES" attributeType="String"/>
+        <relationship name="gasExpenses" optional="YES" toMany="YES" deletionRule="Nullify" destinationEntity="GasExpense" inverseName="vehicle" inverseEntity="GasExpense"/>
+    </entity>
+    <elements>
+        <element name="Expense" positionX="-63" positionY="-18" width="128" height="148"/>
+        <element name="ExpenseType" positionX="-54" positionY="9" width="128" height="73"/>
+        <element name="GasExpense" positionX="-36" positionY="54" width="128" height="118"/>
+        <element name="Vehicle" positionX="-18" positionY="72" width="128" height="133"/>
+    </elements>
+</model>
