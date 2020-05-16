@@ -25,6 +25,7 @@ class SettingsExpenseTypeViewController: UIViewController {
         if expenseType != nil {
             expenseTypeTF.text = expenseType.name
         }
+        expenseTypeTF.becomeFirstResponder()
         
     }
     
@@ -47,9 +48,7 @@ class SettingsExpenseTypeViewController: UIViewController {
             navigationController?.popViewController(animated: true)
             
         } else {
-            let alert = UIAlertController(title: "Error", message: "Type the Expense type name to be saved.", preferredStyle: .alert)
-            alert.addAction(UIAlertAction(title: "Retry", style: .cancel, handler: nil))
-            present(alert, animated: true, completion: nil)
+            showMessage(type: .noDataFound, message: "Type the Expense type name to be saved.")
         }
         
     }

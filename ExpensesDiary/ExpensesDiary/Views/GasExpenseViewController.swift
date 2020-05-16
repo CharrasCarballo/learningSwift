@@ -39,21 +39,8 @@ class GasExpenseViewController: UIViewController {
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
-        
+        mileageTF.becomeFirstResponder()
         vehiclesManager.loadVehicles(with: context)
-    }
-    
-    func checkTF(textField: UITextField, errorMes: String?) -> String? {
-        
-        if let tfString = textField.text, tfString.count > 0 {
-            return tfString
-        } else if errorMes != nil {
-            let alert = UIAlertController(title: "Error", message: errorMes, preferredStyle: .alert)
-            alert.addAction(UIAlertAction(title: "Retry", style: .cancel, handler: nil))
-            present(alert, animated: true, completion: nil)
-        }
-        
-        return nil
     }
     
     @IBAction func saveGasExpense(_ sender: UIButton) {
@@ -78,16 +65,7 @@ class GasExpenseViewController: UIViewController {
         
         delegate?.transferGasExpense(gasExpense: gasExpense)
         
-        navigationController?.popViewController(animated: true)
-    }
-    
-    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        
-        /*print("\nStoryboard ID: \(segue.destination.restorationIdentifier ?? "unknown restorationIdentifier")")
-        print("Segue: \(segue.identifier ?? "without id")")*/
-        
-        print(segue.destination.restorationIdentifier ?? "no identifier")
-        
+        dismiss(animated: true, completion: nil)
     }
 
 }

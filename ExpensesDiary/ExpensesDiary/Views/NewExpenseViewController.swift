@@ -11,16 +11,13 @@ import CoreLocation
 
 class NewExpenseViewController: UIViewController {
     
-    enum MapMessageType {
-        case routeError
-        case authorizationWarning
-    }
+    
 
     @IBOutlet weak var expenseTypeTF: UITextField!
     @IBOutlet weak var expenseValueTF: UITextField!
     @IBOutlet weak var expenseCommentsTV: UITextView!
     @IBOutlet weak var expenseDP: UIDatePicker!
-    @IBOutlet weak var carButtonItem: UIBarButtonItem!
+    
     
     var expense: Expense!
     var gasExpense: GasExpense!
@@ -49,12 +46,9 @@ class NewExpenseViewController: UIViewController {
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         
-        carButtonItem.image = UIImage(systemName: "")
-        carButtonItem.isEnabled = false
-        
         expenseTypesManager.loadExpenseTypes(with: context)
         
-        print("gasExpense: \(String(describing: gasExpense))")
+        //print("gasExpense: \(String(describing: gasExpense))")
         
     }
     
@@ -75,7 +69,7 @@ class NewExpenseViewController: UIViewController {
     
     @objc func cancel() {
         
-        expenseTypeTF.resignFirstResponder()
+        expenseValueTF.becomeFirstResponder()
         
     }
     
@@ -84,11 +78,14 @@ class NewExpenseViewController: UIViewController {
         expenseTypeTF.text = expenseTypesManager.expenseTypes[expenseTypePickerView.selectedRow(inComponent: 0)].name
         
         if expenseTypeTF.text == "Gas" {
-            carButtonItem.image = UIImage(systemName: "car")
-            carButtonItem.isEnabled = true
-        } else {
-            carButtonItem.image = UIImage(systemName: "")
-            carButtonItem.isEnabled = false
+            
+            expenseValueTF.becomeFirstResponder()
+            
+            let gasExpenseVC = storyboard?.instantiateViewController(identifier: "GasExpenseViewController") as! GasExpenseViewController
+            gasExpenseVC.modalPresentationStyle = .overCurrentContext
+            gasExpenseVC.delegate = self
+            present(gasExpenseVC, animated: true, completion: nil)
+            
         }
         
         cancel()
@@ -99,7 +96,7 @@ class NewExpenseViewController: UIViewController {
         if CLLocationManager.locationServicesEnabled() {
             switch CLLocationManager.authorizationStatus() {
                 case .denied, .restricted:
-                    showMessage(type: .authorizationWarning)
+                    showMessage(type: .authorizationWarning, message: "If Location is authorize for this app at Settings/Privacy/Location Services your location will be saved for each expense.")
                 case .notDetermined:
                     locationManager.requestWhenInUseAuthorization()
                 case .authorizedAlways, .authorizedWhenInUse:
@@ -108,30 +105,11 @@ class NewExpenseViewController: UIViewController {
                     break
             }
         } else {
-            showMessage(type: .authorizationWarning)
+            showMessage(type: .authorizationWarning, message: "Location services is disable. If you want to enable go to Settings and authorize this App to use your location.")
         }
     }
     
-    func showMessage(type: MapMessageType) {
-        
-        let title = type == .authorizationWarning ? "FYI" : "Error"
-        let message = type == .authorizationWarning ? "If Location is authorize for this app at Settings/Privacy/Location Services your location will be saved for each expense." : "The Location is not available."
-        
-        let alert = UIAlertController(title: title, message: message, preferredStyle: .alert)
-        let cancelAction = UIAlertAction(title: "Cancel", style: .cancel, handler: nil)
-        alert.addAction(cancelAction)
-        
-        if type == .authorizationWarning {
-            let confirmAction = UIAlertAction(title: "Go to Settings", style: .default, handler: { (action) in
-                
-                if let appSettings = URL(string: UIApplication.openSettingsURLString) {
-                    UIApplication.shared.open(appSettings, options: [:], completionHandler: nil)
-                }
-            })
-            alert.addAction(confirmAction)
-        }
-        present(alert, animated: true, completion: nil)
-    }
+    
     
     @IBAction func saveExpense(_ sender: UIButton) {
         
@@ -145,18 +123,14 @@ class NewExpenseViewController: UIViewController {
             let expenseTypeSelected = expenseTypesManager.expenseTypes[expenseTypePickerView.selectedRow(inComponent: 0)]
             expense.type = expenseTypeSelected
         } else {
-            let alert = UIAlertController(title: "Error", message: "Need to select an expense type.", preferredStyle: .alert)
-            alert.addAction(UIAlertAction(title: "Retry", style: .cancel, handler: nil))
-            present(alert, animated: true, completion: nil)
+            showMessage(type: .noDataFound, message: "Need to select an expense type.")
             saveData = false
         }
         
         if let value = Float(expenseValueTF.text!) {
             expense.value = value
         } else {
-            let alert = UIAlertController(title: "Error", message: "Need write a value.", preferredStyle: .alert)
-            alert.addAction(UIAlertAction(title: "Retry", style: .cancel, handler: nil))
-            present(alert, animated: true, completion: nil)
+            showMessage(type: .noDataFound, message: "Need to write how much was paid.")
             saveData = false
         }
         
@@ -171,7 +145,25 @@ class NewExpenseViewController: UIViewController {
             expense.latitude = String(describing: location.coordinate.latitude)
         }
         
+        if gasExpense != nil {
+            expense.gasExpense = gasExpense
+            print("Gas expense included")
+        }
+        
         if saveData {
+            do {
+                try context.save()
+                expenseValueTF.text = ""
+                expenseCommentsTV.text = ""
+                expenseTypeTF.becomeFirstResponder()
+                showMessage(type: .dataSaved, message: "Data saved successfully.", title: "Congrats!")
+            } catch {
+                showMessage(type: .errorSavingData, message: error.localizedDescription)
+            }
+        }
+        
+        
+        /*if saveData {
             
             print("Type: \(expense.type?.name ?? "without type")")
             print("Value: \(expense.value)")
@@ -182,7 +174,7 @@ class NewExpenseViewController: UIViewController {
             
         } else {
             print("Missing information")
-        }
+        }*/
     }
 }
 
@@ -205,5 +197,6 @@ extension NewExpenseViewController: UIPickerViewDelegate, UIPickerViewDataSource
 extension NewExpenseViewController: GasExpenseDelegate {
     func transferGasExpense(gasExpense: GasExpense) {
         self.gasExpense = gasExpense
+        //print("gasExpense: \(String(describing: self.gasExpense))")
     }
 }

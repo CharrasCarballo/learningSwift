@@ -7,6 +7,10 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		7724FDCB246F17BA00E26879 /* HistoryForSpecificTypeTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7724FDCA246F17BA00E26879 /* HistoryForSpecificTypeTableViewController.swift */; };
+		7777DA5B2468D5B0005BD38A /* ExpensesManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7777DA5A2468D5B0005BD38A /* ExpensesManager.swift */; };
+		7777DA5D2468FC0B005BD38A /* HistoryFilterSettingsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7777DA5C2468FC0B005BD38A /* HistoryFilterSettingsViewController.swift */; };
+		77E1154024705E7B00C80943 /* HistoryforSpecificTypeTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 77E1153F24705E7B00C80943 /* HistoryforSpecificTypeTableViewCell.swift */; };
 		FF47DC90244CBC130093A93F /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = FF47DC8F244CBC130093A93F /* AppDelegate.swift */; };
 		FF47DC92244CBC130093A93F /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = FF47DC91244CBC130093A93F /* SceneDelegate.swift */; };
 		FF47DC97244CBC130093A93F /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = FF47DC95244CBC130093A93F /* Main.storyboard */; };
@@ -25,9 +29,14 @@
 		FF47DCC9244FEF880093A93F /* SettingsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = FF47DCC8244FEF880093A93F /* SettingsViewController.swift */; };
 		FF47DCCB24514EBD0093A93F /* VehiclesManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = FF47DCCA24514EBD0093A93F /* VehiclesManager.swift */; };
 		FF47DCCD2454FDB50093A93F /* GasExpenseViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = FF47DCCC2454FDB50093A93F /* GasExpenseViewController.swift */; };
+		FF5833EC245FAF62004BA08A /* BaseViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = FF5833EB245FAF62004BA08A /* BaseViewController.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		7724FDCA246F17BA00E26879 /* HistoryForSpecificTypeTableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HistoryForSpecificTypeTableViewController.swift; sourceTree = "<group>"; };
+		7777DA5A2468D5B0005BD38A /* ExpensesManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ExpensesManager.swift; sourceTree = "<group>"; };
+		7777DA5C2468FC0B005BD38A /* HistoryFilterSettingsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HistoryFilterSettingsViewController.swift; sourceTree = "<group>"; };
+		77E1153F24705E7B00C80943 /* HistoryforSpecificTypeTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HistoryforSpecificTypeTableViewCell.swift; sourceTree = "<group>"; };
 		FF47DC8C244CBC130093A93F /* ExpensesDiary.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = ExpensesDiary.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		FF47DC8F244CBC130093A93F /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		FF47DC91244CBC130093A93F /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -49,6 +58,7 @@
 		FF47DCC8244FEF880093A93F /* SettingsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsViewController.swift; sourceTree = "<group>"; };
 		FF47DCCA24514EBD0093A93F /* VehiclesManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VehiclesManager.swift; sourceTree = "<group>"; };
 		FF47DCCC2454FDB50093A93F /* GasExpenseViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GasExpenseViewController.swift; sourceTree = "<group>"; };
+		FF5833EB245FAF62004BA08A /* BaseViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BaseViewController.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -113,6 +123,8 @@
 				FF47DCC6244FEF5A0093A93F /* SettingsExpenseTypeViewController.swift */,
 				FF47DCC8244FEF880093A93F /* SettingsViewController.swift */,
 				FF47DCAE244D5FE70093A93F /* HistoryOfExpensesTableViewController.swift */,
+				7724FDCA246F17BA00E26879 /* HistoryForSpecificTypeTableViewController.swift */,
+				7777DA5C2468FC0B005BD38A /* HistoryFilterSettingsViewController.swift */,
 				FF47DCAC244D5F920093A93F /* NewExpenseViewController.swift */,
 				FF47DCCC2454FDB50093A93F /* GasExpenseViewController.swift */,
 			);
@@ -123,6 +135,7 @@
 			isa = PBXGroup;
 			children = (
 				FF47DCBA244D6A240093A93F /* ViewController+CoreData.swift */,
+				FF5833EB245FAF62004BA08A /* BaseViewController.swift */,
 			);
 			path = Extensions;
 			sourceTree = "<group>";
@@ -132,6 +145,7 @@
 			children = (
 				FF47DCB8244D65610093A93F /* ExpenseTypesManager.swift */,
 				FF47DCCA24514EBD0093A93F /* VehiclesManager.swift */,
+				7777DA5A2468D5B0005BD38A /* ExpensesManager.swift */,
 			);
 			path = CoreDataTablesManager;
 			sourceTree = "<group>";
@@ -140,6 +154,7 @@
 			isa = PBXGroup;
 			children = (
 				FF47DCAA244D16C20093A93F /* ConfigurableButton.swift */,
+				77E1153F24705E7B00C80943 /* HistoryforSpecificTypeTableViewCell.swift */,
 			);
 			path = CustomViews;
 			sourceTree = "<group>";
@@ -234,18 +249,23 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				7724FDCB246F17BA00E26879 /* HistoryForSpecificTypeTableViewController.swift in Sources */,
 				FF47DCAB244D16C20093A93F /* ConfigurableButton.swift in Sources */,
 				FF47DCC5244FEF2E0093A93F /* SettingsVehicleViewController.swift in Sources */,
 				FF47DCAF244D5FE70093A93F /* HistoryOfExpensesTableViewController.swift in Sources */,
 				FF47DCAD244D5F920093A93F /* NewExpenseViewController.swift in Sources */,
 				FF47DCB9244D65610093A93F /* ExpenseTypesManager.swift in Sources */,
+				FF5833EC245FAF62004BA08A /* BaseViewController.swift in Sources */,
 				FF47DCBB244D6A240093A93F /* ViewController+CoreData.swift in Sources */,
 				FF47DCCD2454FDB50093A93F /* GasExpenseViewController.swift in Sources */,
+				7777DA5B2468D5B0005BD38A /* ExpensesManager.swift in Sources */,
 				FF47DC90244CBC130093A93F /* AppDelegate.swift in Sources */,
 				FF47DCCB24514EBD0093A93F /* VehiclesManager.swift in Sources */,
 				FF47DC9A244CBC130093A93F /* ExpensesDiary.xcdatamodeld in Sources */,
+				7777DA5D2468FC0B005BD38A /* HistoryFilterSettingsViewController.swift in Sources */,
 				FF47DC92244CBC130093A93F /* SceneDelegate.swift in Sources */,
 				FF47DCC7244FEF5A0093A93F /* SettingsExpenseTypeViewController.swift in Sources */,
+				77E1154024705E7B00C80943 /* HistoryforSpecificTypeTableViewCell.swift in Sources */,
 				FF47DCC9244FEF880093A93F /* SettingsViewController.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

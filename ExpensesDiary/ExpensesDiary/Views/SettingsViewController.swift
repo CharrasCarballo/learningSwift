@@ -12,6 +12,8 @@ class SettingsViewController: UIViewController {
 
     @IBOutlet weak var expensesTypesTableView: UITableView!
     @IBOutlet weak var vehiclesTableView: UITableView!
+    @IBOutlet weak var emptyTableExpenseTypesView: UIView!
+    @IBOutlet weak var emptyTableVehiclesView: UIView!
     
     var expenseTypesManager = ExpenseTypesManager.shared
     var vehiclesManager = VehiclesManager.shared
@@ -53,8 +55,18 @@ extension SettingsViewController: UITableViewDataSource, UITableViewDelegate {
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         if tableView == expensesTypesTableView {
+            if expenseTypesManager.expenseTypes.count > 0 {
+                emptyTableExpenseTypesView.isHidden = true
+            } else {
+                emptyTableExpenseTypesView.isHidden = false
+            }
             return expenseTypesManager.expenseTypes.count
         } else if tableView == vehiclesTableView {
+            if vehiclesManager.vehicles.count > 0 {
+                emptyTableVehiclesView.isHidden = true
+            } else {
+                emptyTableVehiclesView.isHidden = false
+            }
             return vehiclesManager.vehicles.count
         } else {
             print("TableView not recognized in rows in section")
